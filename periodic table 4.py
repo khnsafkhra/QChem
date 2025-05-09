@@ -175,4 +175,5 @@ elif selected_game == "Kuis Senyawa Organik":
         q = organic_questions[st.session_state.org_index]
         st.markdown('<div class="question-card">', unsafe_allow_html=True)
         st.subheader(f"Soal #{st.session_state.org_index+1} dari {len(organic_questions)}")
-        ans_in = st.text_input(f"🔬 {q['
+        ans_in = st.text_input(f"🔬 {q['q']}", key=f"org_in_{st.session_state.org_index}")
+
