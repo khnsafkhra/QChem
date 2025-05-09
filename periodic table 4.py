@@ -54,17 +54,19 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- Tampilan Utama: Selamat datang di QChems ---
-if selected_game is None:
+# --- Tampilan Awal: Selamat datang di QChems ---
+if selected_game == "Kuis Tabel Periodik" or selected_game == "Kuis Senyawa Organik":
+    # Tampilan kuis akan muncul setelah game dipilih
+    pass
+else:
+    # Jika belum memilih game
     st.title("Selamat Datang di QChems")
     st.write("Pilih game di sidebar untuk memulai kuis!")
 
-# === GAME 1: Kuis Tabel Periodik (5 soal) ===
-NUM_PT = 5
-
+# === Sidebar untuk memilih game ===
 if selected_game == "Kuis Tabel Periodik":
     st.title("🧪 Kuis Tabel Periodik Unsur")
-
+    
     periodic_table = [
         {"name":"hidrogen","symbol":"H","number":1,"group":1,"period":1},
         {"name":"helium","symbol":"He","number":2,"group":18,"period":1},
@@ -90,6 +92,8 @@ if selected_game == "Kuis Tabel Periodik":
         {"name":"silikon","symbol":"Si","number":14,"group":14,"period":3},
         {"name":"nikel","symbol":"Ni","number":28,"group":10,"period":4},
     ]
+    
+    NUM_PT = 5
 
     # Initialize session state
     if "pt_score" not in st.session_state:
@@ -158,7 +162,6 @@ if selected_game == "Kuis Tabel Periodik":
             for k in ["pt_score", "pt_index", "pt_q", "pt_feedback", "pt_answered"]:
                 del st.session_state[k]
 
-# === GAME 2: Kuis Senyawa Organik (5 soal) ===
 elif selected_game == "Kuis Senyawa Organik":
     st.title("🧪 Kuis Senyawa Organik")
 
@@ -224,3 +227,4 @@ elif selected_game == "Kuis Senyawa Organik":
         if st.button("🔁 Ulangi Kuis"):
             for k in ["org_score", "org_index", "org_feedback", "org_answered", "org_questions"]:
                 del st.session_state[k]
+
