@@ -1,15 +1,6 @@
 import streamlit as st
 import random
 
-# --- Gambar untuk soal senyawa organik ---
-images = {
-    "metana": "https://path_to_image/metana.png",  # Ganti dengan URL atau path gambar
-    "alkohol": "https://path_to_image/alkohol.png",
-    "asam_acetat": "https://path_to_image/asam_acetat.png",
-    "etanol": "https://path_to_image/etanol.png",
-    "benzen": "https://path_to_image/benzen.png"
-}
-
 # --- Sidebar untuk memilih game ---
 st.sidebar.title("🎮 Pilih Game")
 selected_game = st.sidebar.radio("Pilih Game", ["Kuis Tabel Periodik", "Kuis Senyawa Organik"])
@@ -167,29 +158,35 @@ elif selected_game == "Kuis Senyawa Organik":
     st.title("🧪 Kuis Senyawa Organik")
 
     organic_questions = [
-        {"q":"Apa rumus molekul dari metana?","a":"CH4", "image": images["metana"]},
-        {"q":"Apa gugus fungsi dari alkohol?","a":"OH", "image": images["alkohol"]},
-        {"q":"Apa nama senyawa CH3COOH?","a":"Asam asetat", "image": images["asam_acetat"]},
-        {"q":"Apa nama senyawa dengan rumus C2H5OH?","a":"Etanol", "image": images["etanol"]},
-        {"q":"Apa nama senyawa C6H6?","a":"Benzena", "image": images["benzen"]},
+        {"q":"Apa rumus molekul dari metana?","a":"CH4", "image": "metana"},
+        {"q":"Apa gugus fungsi dari alkohol?","a":"OH", "image": "alkohol"},
+        {"q":"Apa nama senyawa CH3COOH?","a":"Asam asetat", "image": "asam_acetat"},
+        {"q":"Apa nama senyawa dengan rumus C2H5OH?","a":"Etanol", "image": "etanol"},
+        {"q":"Apa nama senyawa C6H6?","a":"Benzena", "image": "benzen"},
     ]
+
+    images = {
+        "metana": "https://path_to_image/metana.png",  
+        "alkohol": "https://path_to_image/alkohol.png",
+        "asam_acetat": "https://path_to_image/asam_acetat.png",
+        "etanol": "https://path_to_image/etanol.png",
+        "benzen": "https://path_to_image/benzen.png"
+    }
 
     if "org_score" not in st.session_state:
         st.session_state.org_score = 0
         st.session_state.org_index = 0
         st.session_state.org_feedback = ""
         st.session_state.org_answered = False
-        st.session_state.org_questions = random.sample(organic_questions, 5)  # Shuffle questions for each session
 
-    if st.session_state.org_index < len(st.session_state.org_questions):
-        q = st.session_state.org_questions[st.session_state.org_index]
-        
+    if st.session_state.org_index < len(organic_questions):
+        q = organic_questions[st.session_state.org_index]
         st.markdown('<div class="question-card">', unsafe_allow_html=True)
-        
-        # Menampilkan gambar
-        st.image(q["image"], use_column_width=True)  # Menampilkan gambar
-        st.subheader(f"Soal #{st.session_state.org_index+1} dari 5")
+        st.subheader(f"Soal #{st.session_state.org_index+1} dari {len(organic_questions)}")
         ans_in = st.text_input(f"🔬 {q['q']}", key=f"org_in_{st.session_state.org_index}")
+
+        if "image" in q and q["image"] in images:
+            st.image(images[q["image"]], use_column_width=True)
 
         if st.button("Kirim Jawaban", key=f"org_sub_{st.session_state.org_index}") and not st.session_state.org_answered:
             if ans_in.strip().lower() == q['a'].lower():
@@ -209,10 +206,10 @@ elif selected_game == "Kuis Senyawa Organik":
                 st.session_state.org_answered = False
 
         st.markdown('</div>', unsafe_allow_html=True)
-        st.markdown(f"<div class='score-box'>🌟 Skor: {st.session_state.org_score}/5</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='score-box'>🌟 Skor: {st.session_state.org_score}/{len(organic_questions)}</div>", unsafe_allow_html=True)
 
     else:
-        st.success(f"🎉 Kuis selesai! Skor akhir: {st.session_state.org_score}/5")
+        st.success(f"🎉 Kuis selesai! Skor akhir: {st.session_state.org_score}/{len(organic_questions)}")
         if st.button("🔁 Ulangi Kuis"):
-            for k in ["org_score", "org_index", "org_feedback", "org_answered", "org_questions"]:
+            for k in ["org_score", "org_index", "org_feedback", "org_answered"]:
                 del st.session_state[k]
