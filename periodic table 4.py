@@ -1,6 +1,15 @@
 import streamlit as st
 import random
 
+# --- Gambar untuk soal senyawa organik ---
+images = {
+    "metana": "https://path_to_image/metana.png",  # Ganti dengan URL atau path gambar
+    "alkohol": "https://path_to_image/alkohol.png",
+    "asam_acetat": "https://path_to_image/asam_acetat.png",
+    "etanol": "https://path_to_image/etanol.png",
+    "benzen": "https://path_to_image/benzen.png"
+}
+
 # --- Sidebar untuk memilih game ---
 st.sidebar.title("🎮 Pilih Game")
 selected_game = st.sidebar.radio("Pilih Game", ["Kuis Tabel Periodik", "Kuis Senyawa Organik"])
@@ -158,19 +167,13 @@ elif selected_game == "Kuis Senyawa Organik":
     st.title("🧪 Kuis Senyawa Organik")
 
     organic_questions = [
-        {"q":"Apa rumus molekul dari metana?","a":"CH4"},
-        {"q":"Apa gugus fungsi dari alkohol?","a":"OH"},
-        {"q":"Apa nama senyawa CH3COOH?","a":"Asam asetat"},
-        {"q":"Apa nama senyawa dengan rumus C2H5OH?","a":"Etanol"},
-        {"q":"Apa nama senyawa C6H6?","a":"Benzena"},
-        {"q":"Apa nama senyawa CH3CH2COOH?","a":"Asam propionat"},
-        {"q":"Apa nama senyawa dengan rumus C3H7OH?","a":"Propanol"},
-        {"q":"Apa nama senyawa yang memiliki rumus C6H12O6?","a":"Glukosa"},
-        {"q":"Apa nama senyawa C4H9OH?","a":"Butanol"},
-        {"q":"Apa nama senyawa CH3NH2?","a":"Metilamina"}
+        {"q":"Apa rumus molekul dari metana?","a":"CH4", "image": images["metana"]},
+        {"q":"Apa gugus fungsi dari alkohol?","a":"OH", "image": images["alkohol"]},
+        {"q":"Apa nama senyawa CH3COOH?","a":"Asam asetat", "image": images["asam_acetat"]},
+        {"q":"Apa nama senyawa dengan rumus C2H5OH?","a":"Etanol", "image": images["etanol"]},
+        {"q":"Apa nama senyawa C6H6?","a":"Benzena", "image": images["benzen"]},
     ]
 
-    # Inisialisasi session state jika belum ada
     if "org_score" not in st.session_state:
         st.session_state.org_score = 0
         st.session_state.org_index = 0
@@ -180,7 +183,11 @@ elif selected_game == "Kuis Senyawa Organik":
 
     if st.session_state.org_index < len(st.session_state.org_questions):
         q = st.session_state.org_questions[st.session_state.org_index]
+        
         st.markdown('<div class="question-card">', unsafe_allow_html=True)
+        
+        # Menampilkan gambar
+        st.image(q["image"], use_column_width=True)  # Menampilkan gambar
         st.subheader(f"Soal #{st.session_state.org_index+1} dari 5")
         ans_in = st.text_input(f"🔬 {q['q']}", key=f"org_in_{st.session_state.org_index}")
 
