@@ -153,7 +153,7 @@ if selected_game == "Kuis Tabel Periodik":
             for k in ["pt_score", "pt_index", "pt_q", "pt_feedback", "pt_answered"]:
                 del st.session_state[k]
 
-# === GAME 2: Kuis Senyawa Organik (5 soal) ===
+# === GAME 2: Kuis Senyawa Organik (10 soal) ===
 elif selected_game == "Kuis Senyawa Organik":
     st.title("🧪 Kuis Senyawa Organik")
 
@@ -163,6 +163,11 @@ elif selected_game == "Kuis Senyawa Organik":
         {"q":"Apa nama senyawa CH3COOH?","a":"Asam asetat"},
         {"q":"Apa nama senyawa dengan rumus C2H5OH?","a":"Etanol"},
         {"q":"Apa nama senyawa C6H6?","a":"Benzena"},
+        {"q":"Apa nama senyawa CH3CH2COOH?","a":"Asam propionat"},
+        {"q":"Apa nama senyawa dengan rumus C3H7OH?","a":"Propanol"},
+        {"q":"Apa nama senyawa yang memiliki rumus C6H12O6?","a":"Glukosa"},
+        {"q":"Apa nama senyawa C4H9OH?","a":"Butanol"},
+        {"q":"Apa nama senyawa CH3NH2?","a":"Metilamina"}
     ]
 
     if "org_score" not in st.session_state:
@@ -177,3 +182,28 @@ elif selected_game == "Kuis Senyawa Organik":
         st.subheader(f"Soal #{st.session_state.org_index+1} dari {len(organic_questions)}")
         ans_in = st.text_input(f"🔬 {q['q']}", key=f"org_in_{st.session_state.org_index}")
 
+        if st.button("Kirim Jawaban", key=f"org_sub_{st.session_state.org_index}") and not st.session_state.org_answered:
+            if ans_in.strip().lower() == q['a'].lower():
+                st.session_state.org_score += 1
+                st.session_state.org_feedback = "✅ Jawaban Benar!"
+                st.balloons()
+            else:
+                st.session_state.org_feedback = f"❌ Salah. Jawaban benar: {q['a']}"
+            st.session_state.org_answered = True
+
+        st.write(st.session_state.org_feedback)
+
+        if st.session_state.org_answered:
+            if st.button("➡️ Soal Berikutnya", key=f"org_next_{st.session_state.org_index}"):
+                st.session_state.org_index += 1
+                st.session_state.org_feedback = ""
+                st.session_state.org_answered = False
+
+        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown(f"<div class='score-box'>🌟 Skor: {st.session_state.org_score}/{len(organic_questions)}</div>", unsafe_allow_html=True)
+
+    else:
+        st.success(f"🎉 Kuis selesai! Skor akhir: {st.session_state.org_score}/{len(organic_questions)}")
+        if st.button("🔁 Ulangi Kuis"):
+            for k in ["org_score", "org_index", "org_feedback", "org_answered"]:
+                del st.session_state[k]
