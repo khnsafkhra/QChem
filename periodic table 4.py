@@ -126,7 +126,7 @@ if selected_game == "Kuis Tabel Periodik":
         st.subheader(f"Soal #{st.session_state.pt_index+1} dari {NUM_PT}")
         user = st.text_input(text, key=f"pt_in_{st.session_state.pt_index}")
 
-        if st.button("Kirim Jawaban", key=f"pt_sub_{st.session_state.pt_index}") and not st.session_state.pt_answered:
+        if st.button("Kirim Jawaban & Lanjutkan", key=f"pt_sub_{st.session_state.pt_index}") and not st.session_state.pt_answered:
             if user.strip().lower() == ans.lower():
                 st.session_state.pt_score += 1
                 st.session_state.pt_feedback = "✅ Jawaban Benar!"
@@ -134,16 +134,12 @@ if selected_game == "Kuis Tabel Periodik":
             else:
                 st.session_state.pt_feedback = f"❌ Salah. Jawaban benar: {ans}"
             st.session_state.pt_answered = True
+            st.session_state.pt_index += 1
+            st.session_state.pt_q = None
+            st.session_state.pt_feedback = ""
+            st.session_state.pt_answered = False
 
         st.write(st.session_state.pt_feedback)
-
-        if st.session_state.pt_answered:
-            if st.button("➡️ Soal Berikutnya", key=f"pt_next_{st.session_state.pt_index}"):
-                st.session_state.pt_index += 1
-                st.session_state.pt_q = None
-                st.session_state.pt_feedback = ""
-                st.session_state.pt_answered = False
-
         st.markdown('</div>', unsafe_allow_html=True)
         st.markdown(f"<div class='score-box'>🌟 Skor: {st.session_state.pt_score}/{NUM_PT}</div>", unsafe_allow_html=True)
 
@@ -177,7 +173,7 @@ elif selected_game == "Kuis Kimia Organik":
         st.subheader(f"Soal #{st.session_state.org_index+1} dari {len(organic_questions)}")
         ans_in = st.text_input(f"🔬 {q['q']}", key=f"org_in_{st.session_state.org_index}")
 
-        if st.button("Kirim Jawaban", key=f"org_sub_{st.session_state.org_index}") and not st.session_state.org_answered:
+        if st.button("Kirim Jawaban & Lanjutkan", key=f"org_next_{st.session_state.org_index}") and not st.session_state.org_answered:
             if ans_in.strip().lower() == q['a'].lower():
                 st.session_state.org_score += 1
                 st.session_state.org_feedback = "✅ Jawaban Benar!"
@@ -185,15 +181,11 @@ elif selected_game == "Kuis Kimia Organik":
             else:
                 st.session_state.org_feedback = f"❌ Salah. Jawaban benar: {q['a']}"
             st.session_state.org_answered = True
+            st.session_state.org_index += 1
+            st.session_state.org_feedback = ""
+            st.session_state.org_answered = False
 
         st.write(st.session_state.org_feedback)
-
-        if st.session_state.org_answered:
-            if st.button("➡️ Soal Berikutnya", key=f"org_next_{st.session_state.org_index}"):
-                st.session_state.org_index += 1
-                st.session_state.org_feedback = ""
-                st.session_state.org_answered = False
-
         st.markdown('</div>', unsafe_allow_html=True)
         st.markdown(f"<div class='score-box'>🌟 Skor: {st.session_state.org_score}/{len(organic_questions)}</div>", unsafe_allow_html=True)
 
