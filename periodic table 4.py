@@ -158,35 +158,41 @@ elif selected_game == "Kuis Senyawa Organik":
     st.title("🧪 Kuis Senyawa Organik")
 
     organic_questions = [
-        {"q":"Apa rumus molekul dari metana?","a":"CH4", "image": "metana"},
-        {"q":"Apa gugus fungsi dari alkohol?","a":"OH", "image": "alkohol"},
-        {"q":"Apa nama senyawa CH3COOH?","a":"Asam asetat", "image": "asam_acetat"},
-        {"q":"Apa nama senyawa dengan rumus C2H5OH?","a":"Etanol", "image": "etanol"},
-        {"q":"Apa nama senyawa C6H6?","a":"Benzena", "image": "benzen"},
+        {"q":"Apa rumus molekul dari metana?","a":"CH4"},
+        {"q":"Apa gugus fungsi dari alkohol?","a":"OH"},
+        {"q":"Apa nama senyawa CH3COOH?","a":"Asam asetat"},
+        {"q":"Apa nama senyawa dengan rumus C2H5OH?","a":"Etanol"},
+        {"q":"Apa nama senyawa C6H6?","a":"Benzena"},
+        {"q":"Apa nama senyawa CH3CH2COOH?","a":"Asam propionat"},
+        {"q":"Apa nama senyawa dengan rumus C3H7OH?","a":"Propanol"},
+        {"q":"Apa nama senyawa yang memiliki rumus C6H12O6?","a":"Glukosa"},
+        {"q":"Apa nama senyawa C4H9OH?","a":"Butanol"},
+        {"q":"Apa nama senyawa CH3NH2?","a":"Metilamina"},
+        {"q":"Apa nama senyawa dengan rumus C5H10O?","a":"Pentanol"},
+        {"q":"Apa nama senyawa CH3CH2COCH3?","a":"Aseton"},
+        {"q":"Apa nama senyawa dengan rumus C7H8?","a":"Toluena"},
+        {"q":"Apa nama senyawa C8H10?","a":"Etilbenzen"},
+        {"q":"Apa nama senyawa C10H12O2?","a":"Asam benzoat metil ester"},
+        {"q":"Apa nama senyawa dengan rumus C3H6O?","a":"Asetaldehida"},
+        {"q":"Apa nama senyawa C4H8O2?","a":"Asam butirat"},
+        {"q":"Apa nama senyawa CH3COOCH3?","a":"Metil asetat"},
+        {"q":"Apa nama senyawa dengan rumus C2H4O2?","a":"Asam asetat"},
+        {"q":"Apa nama senyawa C9H12O?","a":"Fenilpropanol"}
     ]
 
-    images = {
-        "metana": "https://path_to_image/metana.png",  
-        "alkohol": "https://path_to_image/alkohol.png",
-        "asam_acetat": "https://path_to_image/asam_acetat.png",
-        "etanol": "https://path_to_image/etanol.png",
-        "benzen": "https://path_to_image/benzen.png"
-    }
-
+    # Inisialisasi session state jika belum ada
     if "org_score" not in st.session_state:
         st.session_state.org_score = 0
         st.session_state.org_index = 0
         st.session_state.org_feedback = ""
         st.session_state.org_answered = False
+        st.session_state.org_questions = random.sample(organic_questions, 5)  # Shuffle questions for each session
 
-    if st.session_state.org_index < len(organic_questions):
-        q = organic_questions[st.session_state.org_index]
+    if st.session_state.org_index < len(st.session_state.org_questions):
+        q = st.session_state.org_questions[st.session_state.org_index]
         st.markdown('<div class="question-card">', unsafe_allow_html=True)
-        st.subheader(f"Soal #{st.session_state.org_index+1} dari {len(organic_questions)}")
+        st.subheader(f"Soal #{st.session_state.org_index+1} dari 5")
         ans_in = st.text_input(f"🔬 {q['q']}", key=f"org_in_{st.session_state.org_index}")
-
-        if "image" in q and q["image"] in images:
-            st.image(images[q["image"]], use_column_width=True)
 
         if st.button("Kirim Jawaban", key=f"org_sub_{st.session_state.org_index}") and not st.session_state.org_answered:
             if ans_in.strip().lower() == q['a'].lower():
@@ -206,10 +212,10 @@ elif selected_game == "Kuis Senyawa Organik":
                 st.session_state.org_answered = False
 
         st.markdown('</div>', unsafe_allow_html=True)
-        st.markdown(f"<div class='score-box'>🌟 Skor: {st.session_state.org_score}/{len(organic_questions)}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='score-box'>🌟 Skor: {st.session_state.org_score}/5</div>", unsafe_allow_html=True)
 
     else:
-        st.success(f"🎉 Kuis selesai! Skor akhir: {st.session_state.org_score}/{len(organic_questions)}")
+        st.success(f"🎉 Kuis selesai! Skor akhir: {st.session_state.org_score}/5")
         if st.button("🔁 Ulangi Kuis"):
-            for k in ["org_score", "org_index", "org_feedback", "org_answered"]:
+            for k in ["org_score", "org_index", "org_feedback", "org_answered", "org_questions"]:
                 del st.session_state[k]
