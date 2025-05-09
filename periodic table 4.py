@@ -153,7 +153,7 @@ if selected_game == "Kuis Tabel Periodik":
             for k in ["pt_score", "pt_index", "pt_q", "pt_feedback", "pt_answered"]:
                 del st.session_state[k]
 
-# === GAME 2: Kuis Senyawa Organik (5 soal dengan soal baru setelah selesai) ===
+# === GAME 2: Kuis Senyawa Organik (5 soal) ===
 elif selected_game == "Kuis Senyawa Organik":
     st.title("🧪 Kuis Senyawa Organik")
 
@@ -170,7 +170,7 @@ elif selected_game == "Kuis Senyawa Organik":
         {"q":"Apa nama senyawa CH3NH2?","a":"Metilamina"}
     ]
 
-    # Initialize session state
+    # Inisialisasi session state jika belum ada
     if "org_score" not in st.session_state:
         st.session_state.org_score = 0
         st.session_state.org_index = 0
@@ -178,7 +178,6 @@ elif selected_game == "Kuis Senyawa Organik":
         st.session_state.org_answered = False
         st.session_state.org_questions = random.sample(organic_questions, 5)  # Shuffle questions for each session
 
-    # Process the current question
     if st.session_state.org_index < len(st.session_state.org_questions):
         q = st.session_state.org_questions[st.session_state.org_index]
         st.markdown('<div class="question-card">', unsafe_allow_html=True)
