@@ -3,7 +3,7 @@ import random
 
 # --- Sidebar untuk memilih game ---
 st.sidebar.title("🎮 Pilih Game")
-selected_game = st.sidebar.radio("Pilih Game", ["Kuis Tabel Periodik", "Kuis Kimia Organik"])
+selected_game = st.sidebar.radio("Pilih Game", ["Kuis Tabel Periodik", "Kuis Senyawa Organik"])
 
 # --- Styling aesthetic & background gradient ---
 st.markdown("""
@@ -126,7 +126,7 @@ if selected_game == "Kuis Tabel Periodik":
         st.subheader(f"Soal #{st.session_state.pt_index+1} dari {NUM_PT}")
         user = st.text_input(text, key=f"pt_in_{st.session_state.pt_index}")
 
-        if st.button("Kirim Jawaban & Lanjutkan", key=f"pt_sub_{st.session_state.pt_index}") and not st.session_state.pt_answered:
+        if st.button("Kirim Jawaban", key=f"pt_sub_{st.session_state.pt_index}") and not st.session_state.pt_answered:
             if user.strip().lower() == ans.lower():
                 st.session_state.pt_score += 1
                 st.session_state.pt_feedback = "✅ Jawaban Benar!"
@@ -134,12 +134,16 @@ if selected_game == "Kuis Tabel Periodik":
             else:
                 st.session_state.pt_feedback = f"❌ Salah. Jawaban benar: {ans}"
             st.session_state.pt_answered = True
-            st.session_state.pt_index += 1
-            st.session_state.pt_q = None
-            st.session_state.pt_feedback = ""
-            st.session_state.pt_answered = False
 
         st.write(st.session_state.pt_feedback)
+
+        if st.session_state.pt_answered:
+            if st.button("➡️ Soal Berikutnya", key=f"pt_next_{st.session_state.pt_index}"):
+                st.session_state.pt_index += 1
+                st.session_state.pt_q = None
+                st.session_state.pt_feedback = ""
+                st.session_state.pt_answered = False
+
         st.markdown('</div>', unsafe_allow_html=True)
         st.markdown(f"<div class='score-box'>🌟 Skor: {st.session_state.pt_score}/{NUM_PT}</div>", unsafe_allow_html=True)
 
@@ -149,9 +153,9 @@ if selected_game == "Kuis Tabel Periodik":
             for k in ["pt_score", "pt_index", "pt_q", "pt_feedback", "pt_answered"]:
                 del st.session_state[k]
 
-# === GAME 2: Kuis Kimia Organik (5 soal) ===
-elif selected_game == "Kuis Kimia Organik":
-    st.title("🧪 Kuis Kimia Organik")
+# === GAME 2: Kuis Senyawa Organik (5 soal) ===
+elif selected_game == "Kuis Senyawa Organik":
+    st.title("🧪 Kuis Senyawa Organik")
 
     organic_questions = [
         {"q":"Apa rumus molekul dari metana?","a":"CH4"},
@@ -171,26 +175,4 @@ elif selected_game == "Kuis Kimia Organik":
         q = organic_questions[st.session_state.org_index]
         st.markdown('<div class="question-card">', unsafe_allow_html=True)
         st.subheader(f"Soal #{st.session_state.org_index+1} dari {len(organic_questions)}")
-        ans_in = st.text_input(f"🔬 {q['q']}", key=f"org_in_{st.session_state.org_index}")
-
-        if st.button("Kirim Jawaban & Lanjutkan", key=f"org_next_{st.session_state.org_index}") and not st.session_state.org_answered:
-            if ans_in.strip().lower() == q['a'].lower():
-                st.session_state.org_score += 1
-                st.session_state.org_feedback = "✅ Jawaban Benar!"
-                st.balloons()
-            else:
-                st.session_state.org_feedback = f"❌ Salah. Jawaban benar: {q['a']}"
-            st.session_state.org_answered = True
-            st.session_state.org_index += 1
-            st.session_state.org_feedback = ""
-            st.session_state.org_answered = False
-
-        st.write(st.session_state.org_feedback)
-        st.markdown('</div>', unsafe_allow_html=True)
-        st.markdown(f"<div class='score-box'>🌟 Skor: {st.session_state.org_score}/{len(organic_questions)}</div>", unsafe_allow_html=True)
-
-    else:
-        st.success(f"🎉 Kuis selesai! Skor akhir: {st.session_state.org_score}/{len(organic_questions)}")
-        if st.button("🔁 Ulangi Kuis"):
-            for k in ["org_score", "org_index", "org_feedback", "org_answered"]:
-                del st.session_state[k]
+        ans_in = st.text_input(f"🔬 {q['
