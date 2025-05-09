@@ -54,6 +54,11 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+# --- Tampilan Utama: Selamat datang di QChems ---
+if selected_game is None:
+    st.title("Selamat Datang di QChems")
+    st.write("Pilih game di sidebar untuk memulai kuis!")
+
 # === GAME 1: Kuis Tabel Periodik (5 soal) ===
 NUM_PT = 5
 
