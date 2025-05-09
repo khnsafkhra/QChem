@@ -153,7 +153,7 @@ if selected_game == "Kuis Tabel Periodik":
             for k in ["pt_score", "pt_index", "pt_q", "pt_feedback", "pt_answered"]:
                 del st.session_state[k]
 
-# === GAME 2: Kuis Senyawa Organik (10 soal) ===
+# === GAME 2: Kuis Senyawa Organik (5 soal dengan soal baru setelah selesai) ===
 elif selected_game == "Kuis Senyawa Organik":
     st.title("🧪 Kuis Senyawa Organik")
 
@@ -170,16 +170,19 @@ elif selected_game == "Kuis Senyawa Organik":
         {"q":"Apa nama senyawa CH3NH2?","a":"Metilamina"}
     ]
 
+    # Initialize session state
     if "org_score" not in st.session_state:
         st.session_state.org_score = 0
         st.session_state.org_index = 0
         st.session_state.org_feedback = ""
         st.session_state.org_answered = False
+        st.session_state.org_questions = random.sample(organic_questions, 5)  # Shuffle questions for each session
 
-    if st.session_state.org_index < len(organic_questions):
-        q = organic_questions[st.session_state.org_index]
+    # Process the current question
+    if st.session_state.org_index < len(st.session_state.org_questions):
+        q = st.session_state.org_questions[st.session_state.org_index]
         st.markdown('<div class="question-card">', unsafe_allow_html=True)
-        st.subheader(f"Soal #{st.session_state.org_index+1} dari {len(organic_questions)}")
+        st.subheader(f"Soal #{st.session_state.org_index+1} dari 5")
         ans_in = st.text_input(f"🔬 {q['q']}", key=f"org_in_{st.session_state.org_index}")
 
         if st.button("Kirim Jawaban", key=f"org_sub_{st.session_state.org_index}") and not st.session_state.org_answered:
@@ -200,10 +203,10 @@ elif selected_game == "Kuis Senyawa Organik":
                 st.session_state.org_answered = False
 
         st.markdown('</div>', unsafe_allow_html=True)
-        st.markdown(f"<div class='score-box'>🌟 Skor: {st.session_state.org_score}/{len(organic_questions)}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='score-box'>🌟 Skor: {st.session_state.org_score}/5</div>", unsafe_allow_html=True)
 
     else:
-        st.success(f"🎉 Kuis selesai! Skor akhir: {st.session_state.org_score}/{len(organic_questions)}")
+        st.success(f"🎉 Kuis selesai! Skor akhir: {st.session_state.org_score}/5")
         if st.button("🔁 Ulangi Kuis"):
-            for k in ["org_score", "org_index", "org_feedback", "org_answered"]:
+            for k in ["org_score", "org_index", "org_feedback", "org_answered", "org_questions"]:
                 del st.session_state[k]
