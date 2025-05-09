@@ -5,14 +5,15 @@ import random
 st.sidebar.title("🎮 Pilih Game")
 selected_game = st.sidebar.radio("Pilih Game", ["Kuis Tabel Periodik", "Kuis Kimia Organik"])
 
-# --- Styling aesthetic & background gradient ---
+# --- Styling aesthetic dengan gambar kimia sebagai background ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
     html, body, [class*="css"] { font-family: 'Poppins', sans-serif; }
 
     .stApp {
-        background: linear-gradient(to right, #f8cdda, #1d2b64);
+        background-image: url('https://i.ibb.co/9G6k0vM/chemistry-bg.png');
+        background-size: cover;
         background-attachment: fixed;
         color: white;
     }
@@ -54,7 +55,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# === GAME 1: Kuis Tabel Periodik (5 soal) ===
+# === GAME 1: Kuis Tabel Periodik ===
 NUM_PT = 5
 
 if selected_game == "Kuis Tabel Periodik":
@@ -86,7 +87,6 @@ if selected_game == "Kuis Tabel Periodik":
         {"name":"nikel","symbol":"Ni","number":28,"group":10,"period":4},
     ]
 
-    # Initialize session state
     if "pt_score" not in st.session_state:
         st.session_state.pt_score = 0
         st.session_state.pt_index = 0
@@ -94,7 +94,6 @@ if selected_game == "Kuis Tabel Periodik":
         st.session_state.pt_feedback = ""
         st.session_state.pt_answered = False
 
-    # Progress bar
     st.progress(st.session_state.pt_index / NUM_PT)
 
     def new_pt_q():
@@ -153,16 +152,31 @@ if selected_game == "Kuis Tabel Periodik":
             for k in ["pt_score", "pt_index", "pt_q", "pt_feedback", "pt_answered"]:
                 del st.session_state[k]
 
-# === GAME 2: Kuis Kimia Organik (5 soal) ===
+# === GAME 2: Kuis Kimia Organik ===
 elif selected_game == "Kuis Kimia Organik":
     st.title("🧪 Kuis Kimia Organik")
 
     organic_questions = [
-        {"q":"Apa rumus molekul dari metana?","a":"CH4"},
-        {"q":"Apa gugus fungsi dari alkohol?","a":"OH"},
-        {"q":"Apa nama senyawa CH3COOH?","a":"Asam asetat"},
-        {"q":"Apa nama senyawa dengan rumus C2H5OH?","a":"Etanol"},
-        {"q":"Apa nama senyawa C6H6?","a":"Benzena"},
+        {"q":"Apa rumus molekul dari metana?", "a":"CH4"},
+        {"q":"Apa gugus fungsi dari alkohol?", "a":"OH"},
+        {"q":"Apa nama senyawa CH3COOH?", "a":"Asam asetat"},
+        {"q":"Apa nama senyawa dengan rumus C2H5OH?", "a":"Etanol"},
+        {"q":"Apa nama senyawa C6H6?", "a":"Benzena"},
+        {"q":"Apa rumus struktur dari etana?", "a":"CH3CH3"},
+        {"q":"Apa nama senyawa dengan rumus C3H8?", "a":"Propana"},
+        {"q":"Apa nama gugus fungsi dari aldehida?", "a":"CHO"},
+        {"q":"Apa nama gugus fungsi dari keton?", "a":"CO"},
+        {"q":"Apa rumus dari asam format?", "a":"HCOOH"},
+        {"q":"Apa nama senyawa CH3NH2?", "a":"Metilamina"},
+        {"q":"Apa nama senyawa C2H2?", "a":"Etilena"},
+        {"q":"Apa nama senyawa dengan dua gugus OH?", "a":"Diol"},
+        {"q":"Apa nama gugus fungsi ester?", "a":"COO"},
+        {"q":"Apa nama senyawa CH3CH2COOH?", "a":"Asam propionat"},
+        {"q":"Apa nama senyawa aromatik dengan dua cincin?", "a":"Naftalena"},
+        {"q":"Apa nama senyawa dengan ikatan rangkap tiga antara karbon?", "a":"Alkuna"},
+        {"q":"Apa nama gugus fungsi dari amina?", "a":"NH2"},
+        {"q":"Apa senyawa dengan rumus CH3-O-CH3?", "a":"Metoksi metana"},
+        {"q":"Apa rumus molekul dari asam benzoat?", "a":"C6H5COOH"}
     ]
 
     if "org_score" not in st.session_state:
@@ -186,19 +200,4 @@ elif selected_game == "Kuis Kimia Organik":
                 st.session_state.org_feedback = f"❌ Salah. Jawaban benar: {q['a']}"
             st.session_state.org_answered = True
 
-        st.write(st.session_state.org_feedback)
-
-        if st.session_state.org_answered:
-            if st.button("➡️ Soal Berikutnya", key=f"org_next_{st.session_state.org_index}"):
-                st.session_state.org_index += 1
-                st.session_state.org_feedback = ""
-                st.session_state.org_answered = False
-
-        st.markdown('</div>', unsafe_allow_html=True)
-        st.markdown(f"<div class='score-box'>🌟 Skor: {st.session_state.org_score}/{len(organic_questions)}</div>", unsafe_allow_html=True)
-
-    else:
-        st.success(f"🎉 Kuis selesai! Skor akhir: {st.session_state.org_score}/{len(organic_questions)}")
-        if st.button("🔁 Ulangi Kuis"):
-            for k in ["org_score", "org_index", "org_feedback", "org_answered"]:
-                del st.session_state[k]
+        st.write(st.session_state.org_feedb
