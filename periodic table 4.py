@@ -98,7 +98,7 @@ if selected_game == "-- Pilih Game --":
 if selected_game == "Kuis Tabel Periodik":
     st.title("🧪 Kuis Tabel Periodik Unsur")
     NUM_PT = 5
-    periodic_table = [
+    periodic_table = [ 
         {"name":"hidrogen","symbol":"H","number":1,"group":1,"period":1},
         {"name":"helium","symbol":"He","number":2,"group":18,"period":1},
         {"name":"litium","symbol":"Li","number":3,"group":1,"period":2},
@@ -168,8 +168,8 @@ if selected_game == "Kuis Tabel Periodik":
                 st.session_state.pt_feedback = "✅ Jawaban Benar!"
                 st.balloons()
             else:
-                st.session_state.pt_feedback = f"❌ Salah. Jawaban benar: {ans}"
-                st.markdown("❌ Jawaban Salah! 😞")  # Emoji sedih jika salah
+                st.session_state.pt_feedback = f"😢 Salah. Jawaban benar: {ans}"
+                st.snow()
             st.session_state.pt_answered = True
 
         st.write(st.session_state.pt_feedback)
@@ -235,8 +235,8 @@ elif selected_game == "Kuis Senyawa Organik":
                 st.session_state.org_feedback = "✅ Jawaban Benar!"
                 st.balloons()
             else:
-                st.session_state.org_feedback = f"❌ Salah. Jawaban benar: {q['a']}"
-                st.markdown("❌ Jawaban Salah! 😞")  # Emoji sedih jika salah
+                st.session_state.org_feedback = f"😢 Salah. Jawaban benar: {q['a']}"
+                st.snow()
             st.session_state.org_answered = True
 
         st.write(st.session_state.org_feedback)
