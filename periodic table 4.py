@@ -85,11 +85,11 @@ st.markdown("""
 
 # --- Halaman Selamat Datang ---
 if selected_game == "-- Pilih Game --":
-    st.title("🎉 Selamat datang di QChems")
     st.markdown("""
-    <div style='padding: 20px; background-color: rgba(255,255,255,0.1); border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);'>
-        <h2 style='color: white;'>Aplikasi kuis interaktif seputar Tabel Periodik & Senyawa Organik.</h2>
-        <p style='color: white;'>Silakan pilih game dari menu di sebelah kiri untuk memulai.</p>
+    <div style='padding: 30px; background-color: rgba(255,255,255,0.05); border-radius: 20px; text-align: center;'>
+        <h1 style='color: #ffffff; font-size: 48px; text-shadow: 0 0 10px #ffffff, 0 0 20px #00e6e6;'>Selamat datang di QChems</h1>
+        <h3 style='color: #f0f0f0; text-shadow: 0 0 5px #00ffff;'>Aplikasi kuis interaktif seputar Tabel Periodik & Senyawa Organik.</h3>
+        <p style='color: #dddddd;'>Silakan pilih game dari menu di sebelah kiri untuk memulai.</p>
     </div>
     """, unsafe_allow_html=True)
     st.stop()
