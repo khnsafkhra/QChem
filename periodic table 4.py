@@ -47,9 +47,10 @@ else:
 st.markdown("""
     <style>
     .question-card {
-        background: rgba(0, 0, 0, 0.75);
-        backdrop-filter: blur(15px);
-        padding: 25px; border-radius: 20px;
+        background: rgba(0, 0, 0, 0.8); /* Background lebih gelap agar lebih kontras */
+        backdrop-filter: blur(10px);
+        padding: 25px;
+        border-radius: 20px;
         box-shadow: 4px 4px 30px rgba(0,0,0,0.6);
         margin-bottom: 25px;
         animation: fadeIn 1s ease-in-out;
@@ -58,15 +59,20 @@ st.markdown("""
     .score-box {
         background: rgba(0,0,0,0.5);
         backdrop-filter: blur(10px);
-        padding: 15px; border-radius: 12px;
-        font-size: 18px; font-weight: 600;
-        text-align: center; color: white;
+        padding: 15px;
+        border-radius: 12px;
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+        color: white;
         margin-top: 10px;
     }
     .stButton>button {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white; padding: 10px 24px;
-        border-radius: 10px; border: none;
+        color: white;
+        padding: 10px 24px;
+        border-radius: 10px;
+        border: none;
         transition: all 0.3s ease;
     }
     .stButton>button:hover {
