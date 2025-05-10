@@ -18,7 +18,7 @@ st.markdown("""
     }
     [data-testid="stAppViewContainer"] {
         background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.5)), 
-                    url("https://pin.it/68ppoq9k9");
+                    url("https://i.pinimg.com/736x/fc/9b/37/fc9b371615ee0d1a5d2300699007fa7a.jpg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
