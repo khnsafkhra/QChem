@@ -170,13 +170,13 @@ if selected_game == "Kuis Tabel Periodik":
             if user.strip().lower() == ans.lower():
                 st.session_state.pt_score += 1
                 st.session_state.pt_feedback = "✅ Jawaban Benar!"
-                st.balloons()
+                st.balloons()  # Ini animasi balon
             else:
                 st.session_state.pt_feedback = f"❌ Salah. Jawaban benar: {ans}"
             st.session_state.pt_answered = True
 
-        # Feedback muncul dengan animasi slideUp
-        if st.session_state.pt_feedback:
+        # Feedback muncul dengan animasi slideUp hanya jika salah
+        if st.session_state.pt_feedback and not "balloons" in st.session_state.pt_feedback:
             st.markdown(f'<div class="feedback-card" style="animation: slideUp 1s ease-out;">{st.session_state.pt_feedback}</div>', unsafe_allow_html=True)
 
         if st.session_state.pt_answered:
