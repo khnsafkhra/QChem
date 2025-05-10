@@ -12,18 +12,6 @@ st.markdown("""
     html, body, [class*="css"] {
         font-family: 'Poppins', sans-serif;
     }
-    @keyframes slideUp {
-        from { opacity: 0; transform: translateY(30px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    .feedback-correct {
-        animation: slideUp 1s ease-out;
-        color: green;
-    }
-    .feedback-incorrect {
-        animation: slideUp 1s ease-out;
-        color: red;
-    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -177,10 +165,10 @@ if selected_game == "Kuis Tabel Periodik":
         if st.button("Kirim Jawaban", key=f"pt_sub_{st.session_state.pt_index}") and not st.session_state.pt_answered:
             if user.strip().lower() == ans.lower():
                 st.session_state.pt_score += 1
-                st.session_state.pt_feedback = "<div class='feedback-correct'>✅ Jawaban Benar!</div>"
+                st.session_state.pt_feedback = "✅ Jawaban Benar!"
                 st.balloons()
             else:
-                st.session_state.pt_feedback = f"<div class='feedback-incorrect'>❌ Salah. Jawaban benar: {ans}</div>"
+                st.session_state.pt_feedback = f"❌ Salah. Jawaban benar: {ans}"
             st.session_state.pt_answered = True
 
         st.write(st.session_state.pt_feedback)
@@ -243,10 +231,10 @@ elif selected_game == "Kuis Senyawa Organik":
         if st.button("Kirim Jawaban", key=f"org_sub_{st.session_state.org_index}") and not st.session_state.org_answered:
             if ans_in.strip().lower() == q['a'].lower():
                 st.session_state.org_score += 1
-                st.session_state.org_feedback = "<div class='feedback-correct'>✅ Jawaban Benar!</div>"
+                st.session_state.org_feedback = "✅ Jawaban Benar!"
                 st.balloons()
             else:
-                st.session_state.org_feedback = f"<div class='feedback-incorrect'>❌ Salah. Jawaban benar: {q['a']}</div>"
+                st.session_state.org_feedback = f"❌ Salah. Jawaban benar: {q['a']}"
             st.session_state.org_answered = True
 
         st.write(st.session_state.org_feedback)
@@ -263,4 +251,5 @@ elif selected_game == "Kuis Senyawa Organik":
     else:
         st.success(f"🎉 Kuis selesai! Skor akhir: {st.session_state.org_score}/5")
         if st.button("🔁 Ulangi Kuis"):
-            for k in ["org_score",
+            for k in ["org_score", "org_index", "org_feedback", "org_answered", "org_questions"]:
+                del st.session_state[k]
