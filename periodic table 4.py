@@ -80,16 +80,6 @@ st.markdown("""
         from {opacity:0; transform:translateY(20px);}
         to {opacity:1; transform:translateY(0);}
     }
-    @keyframes sadEmoji {
-        0% {transform: translateY(30px); opacity: 0;}
-        100% {transform: translateY(0); opacity: 1;}
-    }
-    .sad-emoji {
-        animation: sadEmoji 1s ease-in-out;
-        font-size: 3rem;
-        color: red;
-        position: relative;
-    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -179,7 +169,7 @@ if selected_game == "Kuis Tabel Periodik":
                 st.balloons()
             else:
                 st.session_state.pt_feedback = f"❌ Salah. Jawaban benar: {ans}"
-                st.markdown('<div class="sad-emoji">😞</div>', unsafe_allow_html=True)  # Emoji sedih muncul dari bawah
+                st.text("😞 Jawaban Salah!")  # Emoji sedih jika salah
             st.session_state.pt_answered = True
 
         st.write(st.session_state.pt_feedback)
@@ -246,7 +236,7 @@ elif selected_game == "Kuis Senyawa Organik":
                 st.balloons()
             else:
                 st.session_state.org_feedback = f"❌ Salah. Jawaban benar: {q['a']}"
-                st.markdown('<div class="sad-emoji">😞</div>', unsafe_allow_html=True)  # Emoji sedih muncul dari bawah
+                st.text("😞 Jawaban Salah!")  # Emoji sedih jika salah
             st.session_state.org_answered = True
 
         st.write(st.session_state.org_feedback)
