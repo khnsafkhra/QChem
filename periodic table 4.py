@@ -175,9 +175,9 @@ if selected_game == "Kuis Tabel Periodik":
                 st.session_state.pt_feedback = f"❌ Salah. Jawaban benar: {ans}"
             st.session_state.pt_answered = True
 
-        # Apply the animation for feedback
-        feedback_style = "slideUp" if st.session_state.pt_feedback else ""
-        st.markdown(f'<div class="feedback-card {feedback_style}">{st.session_state.pt_feedback}</div>', unsafe_allow_html=True)
+        # Feedback muncul dengan animasi slideUp
+        if st.session_state.pt_feedback:
+            st.markdown(f'<div class="feedback-card" style="animation: slideUp 1s ease-out;">{st.session_state.pt_feedback}</div>', unsafe_allow_html=True)
 
         if st.session_state.pt_answered:
             if st.button("➡ Soal Berikutnya", key=f"pt_next_{st.session_state.pt_index}"):
