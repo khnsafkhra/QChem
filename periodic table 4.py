@@ -17,6 +17,7 @@ st.markdown("""
 
 # --- Styling background berdasarkan halaman ---
 if selected_game == "-- Pilih Game --":
+    # Tampilan Selamat Datang
     st.markdown("""
     <style>
     [data-testid="stAppViewContainer"] {
@@ -30,6 +31,7 @@ if selected_game == "-- Pilih Game --":
     </style>
     """, unsafe_allow_html=True)
 else:
+    # Styling gradient hanya untuk halaman game
     st.markdown("""
     <style>
     .stApp {
@@ -78,19 +80,20 @@ st.markdown("""
         from {opacity:0; transform:translateY(20px);}
         to {opacity:1; transform:translateY(0);}
     }
+    .incorrect-answer {
+        animation: shake 0.5s ease-in-out;
+        color: red;
+        font-weight: bold;
+    }
+    @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        50% { transform: translateX(10px); }
+        75% { transform: translateX(-10px); }
+        100% { transform: translateX(0); }
+    }
     </style>
 """, unsafe_allow_html=True)
-
-# --- Halaman Selamat Datang ---
-if selected_game == "-- Pilih Game --":
-    st.title("🎉 Selamat datang di QChems")
-    st.markdown("""
-    <div style='padding: 20px; background-color: rgba(255,255,255,0.1); border-radius: 15px;'>
-        <h2 style='color: white;'>Aplikasi kuis interaktif seputar Tabel Periodik & Senyawa Organik.</h2>
-        <p style='color: white;'>Silakan pilih game dari menu di sebelah kiri untuk memulai.</p>
-    </div>
-    """, unsafe_allow_html=True)
-    st.stop()
 
 # === GAME 1: Kuis Tabel Periodik ===
 if selected_game == "Kuis Tabel Periodik":
@@ -99,7 +102,27 @@ if selected_game == "Kuis Tabel Periodik":
     periodic_table = [
         {"name":"hidrogen","symbol":"H","number":1,"group":1,"period":1},
         {"name":"helium","symbol":"He","number":2,"group":18,"period":1},
-        # data lainnya
+        {"name":"litium","symbol":"Li","number":3,"group":1,"period":2},
+        {"name":"berilium","symbol":"Be","number":4,"group":2,"period":2},
+        {"name":"karbon","symbol":"C","number":6,"group":14,"period":2},
+        {"name":"oksigen","symbol":"O","number":8,"group":16,"period":2},
+        {"name":"natrium","symbol":"Na","number":11,"group":1,"period":3},
+        {"name":"kalsium","symbol":"Ca","number":20,"group":2,"period":4},
+        {"name":"nitrogen","symbol":"N","number":7,"group":15,"period":2},
+        {"name":"magnesium","symbol":"Mg","number":12,"group":2,"period":3},
+        {"name":"aluminium","symbol":"Al","number":13,"group":13,"period":3},
+        {"name":"klorin","symbol":"Cl","number":17,"group":17,"period":3},
+        {"name":"fosfor","symbol":"P","number":15,"group":15,"period":3},
+        {"name":"argon","symbol":"Ar","number":18,"group":18,"period":3},
+        {"name":"kalium","symbol":"K","number":19,"group":1,"period":4},
+        {"name":"mangan","symbol":"Mn","number":25,"group":7,"period":4},
+        {"name":"besi","symbol":"Fe","number":26,"group":8,"period":4},
+        {"name":"tembaga","symbol":"Cu","number":29,"group":11,"period":4},
+        {"name":"zinc","symbol":"Zn","number":30,"group":12,"period":4},
+        {"name":"fluorin","symbol":"F","number":9,"group":17,"period":2},
+        {"name":"neon","symbol":"Ne","number":10,"group":18,"period":2},
+        {"name":"silikon","symbol":"Si","number":14,"group":14,"period":3},
+        {"name":"nikel","symbol":"Ni","number":28,"group":10,"period":4},
     ]
 
     if "pt_score" not in st.session_state:
@@ -144,15 +167,12 @@ if selected_game == "Kuis Tabel Periodik":
             if user.strip().lower() == ans.lower():
                 st.session_state.pt_score += 1
                 st.session_state.pt_feedback = "✅ Jawaban Benar!"
-                st.balloons()  # Untuk balon
+                st.balloons()
             else:
-                st.session_state.pt_feedback = f"❌ Salah. Jawaban benar: {ans}"
-                # Menambahkan tanda silang merah
-                st.markdown("<div style='color:red; font-size: 48px; text-align: center;'>❌</div>", unsafe_allow_html=True)
-
+                st.session_state.pt_feedback = f"<span class='incorrect-answer'>❌ Salah. Jawaban benar: {ans}</span>"
             st.session_state.pt_answered = True
 
-        st.write(st.session_state.pt_feedback)
+        st.markdown(st.session_state.pt_feedback, unsafe_allow_html=True)
 
         if st.session_state.pt_answered:
             if st.button("➡ Soal Berikutnya", key=f"pt_next_{st.session_state.pt_index}"):
@@ -168,54 +188,4 @@ if selected_game == "Kuis Tabel Periodik":
         st.success(f"🎉 Kuis selesai! Skor akhir: {st.session_state.pt_score}/{NUM_PT}")
         if st.button("🔁 Ulangi Kuis"):
             for k in ["pt_score", "pt_index", "pt_q", "pt_feedback", "pt_answered"]:
-                del st.session_state[k]
-
-# === GAME 2: Kuis Senyawa Organik ===
-elif selected_game == "Kuis Senyawa Organik":
-    st.title("🧪 Kuis Senyawa Organik")
-    organic_questions = [
-        {"q":"Apa rumus molekul dari metana?","a":"CH4"},
-        # pertanyaan lainnya
-    ]
-
-    if "org_score" not in st.session_state:
-        st.session_state.org_score = 0
-        st.session_state.org_index = 0
-        st.session_state.org_feedback = ""
-        st.session_state.org_answered = False
-        st.session_state.org_questions = random.sample(organic_questions, 5)
-
-    if st.session_state.org_index < len(st.session_state.org_questions):
-        q = st.session_state.org_questions[st.session_state.org_index]
-        st.markdown('<div class="question-card">', unsafe_allow_html=True)
-        st.subheader(f"Soal #{st.session_state.org_index+1} dari 5")
-        ans_in = st.text_input(f"🔬 {q['q']}", key=f"org_in_{st.session_state.org_index}")
-
-        if st.button("Kirim Jawaban", key=f"org_sub_{st.session_state.org_index}") and not st.session_state.org_answered:
-            if ans_in.strip().lower() == q['a'].lower():
-                st.session_state.org_score += 1
-                st.session_state.org_feedback = "✅ Jawaban Benar!"
-                st.balloons()  # Untuk balon
-            else:
-                st.session_state.org_feedback = f"❌ Salah. Jawaban benar: {q['a']}"
-                # Menambahkan tanda silang merah
-                st.markdown("<div style='color:red; font-size: 48px; text-align: center;'>❌</div>", unsafe_allow_html=True)
-
-            st.session_state.org_answered = True
-
-        st.write(st.session_state.org_feedback)
-
-        if st.session_state.org_answered:
-            if st.button("➡ Soal Berikutnya", key=f"org_next_{st.session_state.org_index}"):
-                st.session_state.org_index += 1
-                st.session_state.org_feedback = ""
-                st.session_state.org_answered = False
-
-        st.markdown('</div>', unsafe_allow_html=True)
-        st.markdown(f"<div class='score-box'>🌟 Skor: {st.session_state.org_score}/5</div>", unsafe_allow_html=True)
-
-    else:
-        st.success(f"🎉 Kuis selesai! Skor akhir: {st.session_state.org_score}/5")
-        if st.button("🔁 Ulangi Kuis"):
-            for k in ["org_score", "org_index", "org_feedback", "org_answered", "org_questions"]:
                 del st.session_state[k]
