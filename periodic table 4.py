@@ -60,7 +60,7 @@ if selected_game == "-- Pilih Game --":
     <style>
     [data-testid="stAppViewContainer"] {
         background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.5)),
-                    url("https://i.imgur.com/iqYJvBg.jpeg");
+                    url("https://i.imgur.com/06z4doi.jpeg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
