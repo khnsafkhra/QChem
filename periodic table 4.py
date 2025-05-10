@@ -87,7 +87,7 @@ st.markdown("""
 if selected_game == "-- Pilih Game --":
     st.title("🎉 Selamat datang di QChems")
     st.markdown("""
-    <div style='padding: 20px; background-color: rgba(255,255,255,0.1); border-radius: 15px;'>
+    <div style='padding: 20px; background-color: rgba(255,255,255,0.1); border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);'>
         <h2 style='color: white;'>Aplikasi kuis interaktif seputar Tabel Periodik & Senyawa Organik.</h2>
         <p style='color: white;'>Silakan pilih game dari menu di sebelah kiri untuk memulai.</p>
     </div>
@@ -98,7 +98,7 @@ if selected_game == "-- Pilih Game --":
 if selected_game == "Kuis Tabel Periodik":
     st.title("🧪 Kuis Tabel Periodik Unsur")
     NUM_PT = 5
-    periodic_table = [ 
+    periodic_table = [
         {"name":"hidrogen","symbol":"H","number":1,"group":1,"period":1},
         {"name":"helium","symbol":"He","number":2,"group":18,"period":1},
         {"name":"litium","symbol":"Li","number":3,"group":1,"period":2},
@@ -168,8 +168,7 @@ if selected_game == "Kuis Tabel Periodik":
                 st.session_state.pt_feedback = "✅ Jawaban Benar!"
                 st.balloons()
             else:
-                st.session_state.pt_feedback = f"😢 Salah. Jawaban benar: {ans}"
-                st.snow()
+                st.session_state.pt_feedback = f"❌ Salah. Jawaban benar: {ans}"
             st.session_state.pt_answered = True
 
         st.write(st.session_state.pt_feedback)
@@ -235,8 +234,7 @@ elif selected_game == "Kuis Senyawa Organik":
                 st.session_state.org_feedback = "✅ Jawaban Benar!"
                 st.balloons()
             else:
-                st.session_state.org_feedback = f"😢 Salah. Jawaban benar: {q['a']}"
-                st.snow()
+                st.session_state.org_feedback = f"❌ Salah. Jawaban benar: {q['a']}"
             st.session_state.org_answered = True
 
         st.write(st.session_state.org_feedback)
