@@ -18,11 +18,12 @@ st.markdown("""
     }
     [data-testid="stAppViewContainer"] {
         background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.5)), 
-                    url("https://i.pinimg.com/736x/fc/9b/37/fc9b371615ee0d1a5d2300699007fa7a.jpg");
+                    url("https://i.imgur.com/iqYJvBg.jpeg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        background-attachment: fixed;
+        background-attachment: fixed;
+    }
     .question-card {
         background: rgba(255,255,255,0.15);
         backdrop-filter: blur(15px);
@@ -152,7 +153,7 @@ if selected_game == "Kuis Tabel Periodik":
         st.write(st.session_state.pt_feedback)
 
         if st.session_state.pt_answered:
-            if st.button("➡️ Soal Berikutnya", key=f"pt_next_{st.session_state.pt_index}"):
+            if st.button("➡ Soal Berikutnya", key=f"pt_next_{st.session_state.pt_index}"):
                 st.session_state.pt_index += 1
                 st.session_state.pt_q = None
                 st.session_state.pt_feedback = ""
@@ -218,7 +219,7 @@ elif selected_game == "Kuis Senyawa Organik":
         st.write(st.session_state.org_feedback)
 
         if st.session_state.org_answered:
-            if st.button("➡️ Soal Berikutnya", key=f"org_next_{st.session_state.org_index}"):
+            if st.button("➡ Soal Berikutnya", key=f"org_next_{st.session_state.org_index}"):
                 st.session_state.org_index += 1
                 st.session_state.org_feedback = ""
                 st.session_state.org_answered = False
