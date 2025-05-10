@@ -169,7 +169,7 @@ if selected_game == "Kuis Tabel Periodik":
                 st.balloons()
             else:
                 st.session_state.pt_feedback = f"❌ Salah. Jawaban benar: {ans}"
-                st.text("😞 Jawaban Salah!")  # Emoji sedih jika salah
+                st.snow()  # Emoji salju jika salah
             st.session_state.pt_answered = True
 
         st.write(st.session_state.pt_feedback)
@@ -236,7 +236,7 @@ elif selected_game == "Kuis Senyawa Organik":
                 st.balloons()
             else:
                 st.session_state.org_feedback = f"❌ Salah. Jawaban benar: {q['a']}"
-                st.text("😞 Jawaban Salah!")  # Emoji sedih jika salah
+                st.snow()  # Emoji salju jika salah
             st.session_state.org_answered = True
 
         st.write(st.session_state.org_feedback)
@@ -255,3 +255,4 @@ elif selected_game == "Kuis Senyawa Organik":
         if st.button("🔁 Ulangi Kuis"):
             for k in ["org_score", "org_index", "org_feedback", "org_answered", "org_questions"]:
                 del st.session_state[k]
+
