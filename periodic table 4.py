@@ -16,14 +16,6 @@ st.markdown("""
         background-attachment: fixed;
         color: white;
     }
-    [data-testid="stAppViewContainer"] {
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.5)), 
-                    url("https://i.imgur.com/iqYJvBg.jpeg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
     .question-card {
         background: rgba(255,255,255,0.15);
         backdrop-filter: blur(15px);
@@ -64,6 +56,19 @@ st.markdown("""
 
 # --- Tampilan Selamat Datang ---
 if selected_game == "-- Pilih Game --":
+    st.markdown("""
+    <style>
+    [data-testid="stAppViewContainer"] {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.5)),
+                    url("https://i.imgur.com/iqYJvBg.jpeg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
     st.title("🎉 Selamat datang di QChems")
     st.markdown("""
     <div style='padding: 20px; background-color: rgba(255,255,255,0.1); border-radius: 15px;'>
