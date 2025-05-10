@@ -84,6 +84,11 @@ st.markdown("""
         from {opacity:0; transform:translateY(20px);}
         to {opacity:1; transform:translateY(0);}
     }
+    @keyframes bounce {
+        0% {transform: translateY(0);}
+        50% {transform: translateY(-10px);}
+        100% {transform: translateY(0);}
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -173,6 +178,8 @@ if selected_game == "Kuis Tabel Periodik":
                 st.balloons()  # Ini animasi balon
             else:
                 st.session_state.pt_feedback = f"❌ Salah. Jawaban benar: {ans}"
+                st.markdown(f'<div style="animation: bounce 1s ease-out;">{st.session_state.pt_feedback}</div>', unsafe_allow_html=True)  # Animasi tanda silang
+
             st.session_state.pt_answered = True
 
         # Feedback muncul dengan animasi slideUp hanya jika salah
