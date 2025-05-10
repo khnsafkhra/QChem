@@ -5,28 +5,57 @@ import random
 st.sidebar.title("🎮 Pilih Game")
 selected_game = st.sidebar.radio("Pilih Game", ["-- Pilih Game --", "Kuis Tabel Periodik", "Kuis Senyawa Organik"])
 
-# --- Styling aesthetic & background gradient ---
+# --- Styling umum font ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-    html, body, [class*="css"] { font-family: 'Poppins', sans-serif; }
+    html, body, [class*="css"] {
+        font-family: 'Poppins', sans-serif;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
+# --- Styling background berdasarkan halaman ---
+if selected_game == "-- Pilih Game --":
+    # Tampilan Selamat Datang
+    st.markdown("""
+    <style>
+    [data-testid="stAppViewContainer"] {
+        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                    url("https://i.imgur.com/06z4doi.jpeg") !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-attachment: fixed !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+else:
+    # Styling dark theme untuk halaman game
+    st.markdown("""
+    <style>
     .stApp {
-        background: linear-gradient(to right, #f8cdda, #1d2b64);
+        background: linear-gradient(to right, #1d1d2b, #0f0f1f);
         background-attachment: fixed;
         color: white;
     }
+    </style>
+    """, unsafe_allow_html=True)
+
+# --- Styling komponen lainnya (selalu aktif) ---
+st.markdown("""
+    <style>
     .question-card {
-        background: rgba(0, 0, 0, 0.7);
+        background: rgba(0, 0, 0, 0.35);
         backdrop-filter: blur(15px);
         padding: 25px; border-radius: 20px;
-        box-shadow: 4px 4px 30px rgba(0,0,0,0.2);
+        box-shadow: 4px 4px 30px rgba(0,0,0,0.5);
         margin-bottom: 25px;
         animation: fadeIn 1s ease-in-out;
         color: #fff;
     }
     .score-box {
-        background: rgba(0,0,0,0.25);
+        background: rgba(0,0,0,0.4);
         backdrop-filter: blur(10px);
         padding: 15px; border-radius: 12px;
         font-size: 18px; font-weight: 600;
@@ -54,21 +83,8 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- Tampilan Selamat Datang ---
+# --- Halaman Selamat Datang ---
 if selected_game == "-- Pilih Game --":
-    st.markdown("""
-    <style>
-    [data-testid="stAppViewContainer"] {
-        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0,0,0,0.6)),
-                    url("https://i.imgur.com/06z4doi.jpeg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
     st.title("🎉 Selamat datang di QChems")
     st.markdown("""
     <div style='padding: 20px; background-color: rgba(255,255,255,0.1); border-radius: 15px;'>
@@ -139,7 +155,7 @@ if selected_game == "Kuis Tabel Periodik":
             text = f"📚 Golongan berapa unsur {e['name'].capitalize()}?"
             ans = str(e["group"])
         else:
-            text = f"📏 Periode berapa unsur {e['name'].capitalize()}?"
+            text = f"🕏 Periode berapa unsur {e['name'].capitalize()}?"
             ans = str(e["period"])
 
         st.markdown('<div class="question-card">', unsafe_allow_html=True)
