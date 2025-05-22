@@ -212,7 +212,103 @@ if selected_game == "Kuis Tabel Periodik":
 
 # === GAME 2: Kuis Senyawa Organik ===
 elif selected_game == "Kuis Senyawa Organik":
-    st.title("🧪 Kuis Senyawa Organik")
+    st.title("🧪 Kuis Senyawa Organik") 
+if selected_game == "Kuis Senyawa Organik":
+    st.header("Pengantar Senyawa Organik")
+
+    st.markdown("""
+    ## I. Hidrokarbon
+
+    Senyawa organik yang hanya mengandung atom karbon (C) dan hidrogen (H).
+
+    **Contoh:**
+    1. **Metana (CH₄):**  
+       Hidrokarbon paling sederhana, termasuk golongan alkana. Gas utama dalam gas alam.  
+    2. **Benzena (C₆H₆):**  
+       Senyawa aromatik, memiliki cincin heksagonal dengan ikatan rangkap terkonjugasi.
+
+    ## II. Gugus Fungsi dan Golongan Senyawa Organik
+
+    Gugus fungsi adalah atom atau kelompok atom spesifik dalam molekul yang bertanggung jawab atas karakteristik reaksi kimia senyawa tersebut.
+
+    ### A. Alkohol  
+    Gugus Fungsi: Hidroksil (-OH)  
+    Rumus Umum: R-OH (dimana R adalah gugus alkil)
+
+    **Contoh:**  
+    1. Etanol (C₂H₅OH): Alkohol yang umum ditemukan dalam minuman beralkohol.  
+    2. Propanol (CH₃(CH₂)₂OH): Alkohol dengan 3 atom karbon.  
+    3. Butanol (CH₃(CH₂)₃OH): Alkohol dengan 4 atom karbon.  
+    4. Pentanol (C₅H₁₁OH): Alkohol dengan 5 atom karbon.
+
+    ### B. Asam Karboksilat  
+    Gugus Fungsi: Karboksil (-COOH)  
+    Rumus Umum: R-COOH
+
+    **Contoh:**  
+    1. Asam Asetat (CH₃COOH): Asam yang memberikan rasa asam pada cuka.  
+    2. Asam Propionat (CH₃CH₂COOH): Asam karboksilat dengan 3 atom karbon.  
+    3. Asam Butirat (C₃H₇COOH): Asam karboksilat dengan 4 atom karbon.  
+    4. Asam Metanoat (HCOOH): Asam format, asam karboksilat paling sederhana.
+
+    ### C. Keton  
+    Gugus Fungsi: Karbonil (>C=O) yang terikat pada dua gugus alkil.  
+    Rumus Umum: R-CO-R'
+
+    **Contoh:**  
+    Aseton (CH₃COCH₃): Pelarut yang umum digunakan, contoh keton paling sederhana.
+
+    ### D. Amina  
+    Gugus Fungsi: Amino (-NH₂)  
+    Rumus Umum: R-NH₂ (amina primer)
+
+    **Contoh:**  
+    1. Metilamina (CH₃NH₂): Amina primer paling sederhana.  
+    2. Propilamina (CH₃(CH₂)₂NH₂): Amina primer dengan 3 atom karbon.
+
+    ### E. Ester  
+    Gugus Fungsi: Alkoksi-karbonil (-COOR')  
+    Rumus Umum: R-COOR'
+
+    **Contoh:**  
+    Metil asetat (CH₃COOCH₃): Ester yang memberikan aroma buah-buahan.
+
+    ### F. Amida  
+    Gugus Fungsi: Karbonil yang terikat pada gugus amino (-CONH₂)  
+    Rumus Umum: R-CONH₂
+
+    **Contoh:**  
+    Etanamida (CH₃CONH₂): Amida paling sederhana yang berasal dari asam asetat.
+
+    ## III. Senyawa Turunan Halogen (Haloalkana)
+
+    Definisi: Senyawa organik di mana satu atau lebih atom hidrogen digantikan oleh atom halogen (F, Cl, Br, I).
+
+    **Contoh:**  
+    Metilklorida (CH₃Cl): Turunan metana dengan satu atom hidrogen digantikan oleh klorin.
+
+    ## IV. Senyawa Aromatik Terganti
+
+    Definisi: Senyawa benzena di mana satu atau lebih atom hidrogen pada cincin benzena digantikan oleh gugus lain.
+
+    **Contoh:**  
+    Etilbenzena (C₆H₅CH₂CH₃ atau C₆H₅C₂H₅): Benzena dengan satu gugus etil (-CH₂CH₃) terikat.
+
+    ## V. Karbohidrat (Contoh Umum)
+
+    Definisi: Senyawa organik yang mengandung karbon, hidrogen, dan oksigen, biasanya dengan rumus umum (CH₂O)n. Sumber energi utama bagi makhluk hidup.
+
+    **Contoh:**  
+    Glukosa (C₆H₁₂O₆): Monosakarida, gula sederhana yang merupakan unit dasar banyak karbohidrat kompleks.
+
+    ---
+
+    **Referensi:**  
+    Irawan, C., & Utami, A. (2024). *Pengantar kimia organik*. Yogyakarta: Deepublish.
+    """)
+
+    # Setelah ini baru panggil fungsi kuis atau tampilkan soal kuis
+
     organic_questions = [
         {"q":"Apa rumus molekul dari metana?","a":"CH4"},
         {"q":"Apa gugus fungsi dari alkohol?","a":"OH"},
