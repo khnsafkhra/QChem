@@ -307,7 +307,7 @@ elif selected_game == "Kuis Senyawa Organik":
     """)
     if st.button("Mulai Kuis"):
             st.session_state.pt_started = True
-        st.stop()
+    st.stop()
 
     # Setelah ini baru panggil fungsi kuis atau tampilkan soal kuis
 
