@@ -305,6 +305,9 @@ elif selected_game == "Kuis Senyawa Organik":
     **Referensi:**  
     Irawan, C., & Utami, A. (2024). *Pengantar kimia organik*. Yogyakarta: Deepublish.
     """)
+    if st.button("Mulai Kuis"):
+            st.session_state.pt_started = True
+        st.stop()
 
     # Setelah ini baru panggil fungsi kuis atau tampilkan soal kuis
 
