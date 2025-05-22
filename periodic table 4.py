@@ -1,3 +1,4 @@
+
 import streamlit as st
 import random
 
@@ -17,7 +18,6 @@ st.markdown("""
 
 # --- Styling background berdasarkan halaman ---
 if selected_game == "-- Pilih Game --":
-    # Tampilan Selamat Datang
     st.markdown("""
     <style>
     [data-testid="stAppViewContainer"] {
@@ -31,7 +31,6 @@ if selected_game == "-- Pilih Game --":
     </style>
     """, unsafe_allow_html=True)
 else:
-    # Styling gradient hanya untuk halaman game
     st.markdown("""
     <style>
     .stApp {
@@ -42,7 +41,7 @@ else:
     </style>
     """, unsafe_allow_html=True)
 
-# --- Styling komponen lainnya (selalu aktif) ---
+# --- Styling komponen lainnya ---
 st.markdown("""
     <style>
     .question-card {
@@ -97,6 +96,12 @@ if selected_game == "-- Pilih Game --":
 # === GAME 1: Kuis Tabel Periodik ===
 if selected_game == "Kuis Tabel Periodik":
     st.title("🧪 Kuis Tabel Periodik Unsur")
+    
+    # Tambahan gambar tabel periodik sebelum soal
+    st.image("https://upload.wikimedia.org/wikipedia/commons/6/6f/Periodic_Table_Armtuk3.png", 
+             caption="Tabel Periodik Unsur", use_column_width=True)
+    st.markdown("---")
+    
     NUM_PT = 5
     periodic_table = [
         {"name":"hidrogen","symbol":"H","number":1,"group":1,"period":1},
