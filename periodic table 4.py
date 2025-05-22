@@ -99,7 +99,7 @@ if selected_game == "Kuis Tabel Periodik":
 
     if not st.session_state.pt_started:
         st.title("🧪 Kuis Tabel Periodik Unsur")
-        st.image("https://i.imgur.com/Kcgjoc5.png", caption="Tabel Periodik Unsur", use_column_width=True)
+        st.image("https://i.imgur.com/w6V8Pfg.png", caption="Tabel Periodik Unsur", use_container_width=True)
         if st.button("Mulai Kuis"):
             st.session_state.pt_started = True
         st.stop()
