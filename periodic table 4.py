@@ -213,7 +213,7 @@ if selected_game == "Kuis Tabel Periodik":
 # === GAME 2: Kuis Senyawa Organik ===
 elif selected_game == "Kuis Senyawa Organik":
     st.title("🧪 Kuis Senyawa Organik") 
-if selected_game == "Kuis Senyawa Organik":
+elif selected_game == "Kuis Senyawa Organik":
     st.header("Pengantar Senyawa Organik")
 
     st.markdown("""
