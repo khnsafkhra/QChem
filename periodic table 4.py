@@ -1,4 +1,3 @@
-
 import streamlit as st
 import random
 
@@ -41,7 +40,7 @@ else:
     </style>
     """, unsafe_allow_html=True)
 
-# --- Styling komponen lainnya ---
+# --- Styling komponen lainnya (selalu aktif) ---
 st.markdown("""
     <style>
     .question-card {
@@ -95,13 +94,16 @@ if selected_game == "-- Pilih Game --":
 
 # === GAME 1: Kuis Tabel Periodik ===
 if selected_game == "Kuis Tabel Periodik":
-    st.title("🧪 Kuis Tabel Periodik Unsur")
-    
-    # Tambahan gambar tabel periodik sebelum soal
-    st.image("https://upload.wikimedia.org/wikipedia/commons/6/6f/Periodic_Table_Armtuk3.png", 
-             caption="Tabel Periodik Unsur", use_column_width=True)
-    st.markdown("---")
-    
+    if "pt_started" not in st.session_state:
+        st.session_state.pt_started = False
+
+    if not st.session_state.pt_started:
+        st.title("🧪 Kuis Tabel Periodik Unsur")
+        st.image("https://i.imgur.com/w6V8Pfg.png", caption="Tabel Periodik Unsur", use_column_width=True)
+        if st.button("Mulai Kuis"):
+            st.session_state.pt_started = True
+        st.stop()
+
     NUM_PT = 5
     periodic_table = [
         {"name":"hidrogen","symbol":"H","number":1,"group":1,"period":1},
@@ -191,7 +193,7 @@ if selected_game == "Kuis Tabel Periodik":
     else:
         st.success(f"🎉 Kuis selesai! Skor akhir: {st.session_state.pt_score}/{NUM_PT}")
         if st.button("🔁 Ulangi Kuis"):
-            for k in ["pt_score", "pt_index", "pt_q", "pt_feedback", "pt_answered"]:
+            for k in ["pt_score", "pt_index", "pt_q", "pt_feedback", "pt_answered", "pt_started"]:
                 del st.session_state[k]
 
 # === GAME 2: Kuis Senyawa Organik ===
