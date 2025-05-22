@@ -108,11 +108,6 @@ if selected_game == "Kuis Tabel Periodik":
         st.stop()
 
     NUM_PT = 5
-    group_labels = {
-        1: "1A", 2: "2A", 13: "3A", 14: "4A", 15: "5A",
-        16: "6A", 17: "7A", 18: "8A"
-    }
-
     periodic_table = [
         {"name":"hidrogen","symbol":"H","number":1,"group":1,"period":1},
         {"name":"helium","symbol":"He","number":2,"group":18,"period":1},
@@ -138,6 +133,11 @@ if selected_game == "Kuis Tabel Periodik":
         {"name":"silikon","symbol":"Si","number":14,"group":14,"period":3},
         {"name":"nikel","symbol":"Ni","number":28,"group":10,"period":4},
     ]
+# Map golongan ke label A/B (IUPAC lama)
+group_labels = {
+    1: "1A", 2: "2A", 13: "3A", 14: "4A", 15: "5A", 16: "6A", 17: "7A", 18: "8A",
+    3: "3B", 4: "4B", 5: "5B", 6: "6B", 7: "7B", 8: "8B", 9: "8B", 10: "8B", 11: "1B", 12: "2B"
+}
 
     if "pt_score" not in st.session_state:
         st.session_state.pt_score = 0
@@ -169,7 +169,7 @@ if selected_game == "Kuis Tabel Periodik":
         elif q["type"] == "group":
             text = f"📚 Golongan berapa unsur {e['name'].capitalize()}?"
             ans = str(e["group"])
-            alt = group_labels.get(e["group"], "")
+            st.caption("💡 Jawaban bisa berupa angka (mis. 1) atau format lama (mis. 1A)")
         else:
             text = f"🕏 Periode berapa unsur {e['name'].capitalize()}?"
             ans = str(e["period"])
@@ -180,6 +180,11 @@ if selected_game == "Kuis Tabel Periodik":
 
         if st.button("Kirim Jawaban", key=f"pt_sub_{st.session_state.pt_index}") and not st.session_state.pt_answered:
             user_ans = user.strip().lower()
+correct = ans.lower()
+alt_label = group_labels.get(e["group"], "").lower()
+
+if user_ans == correct or (q["type"] == "group" and user_ans == alt_label):
+
             correct = user_ans == ans.lower() or (q["type"] == "group" and alt.lower() == user_ans)
             if correct:
                 st.session_state.pt_score += 1
